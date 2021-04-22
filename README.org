@@ -1,0 +1,38 @@
+* springy
+  A bare-bones ElasticSearch client for Deno. Contains just enough
+  features to get by, with TypeScript support.
+
+** Features
+   Supported operations
+   - ~search()~
+   - ~get()~
+
+** Example
+   #+begin_src typescript
+     import { Client } from 'https://github.com/fred-o/springy/raw/master/mod.ts'
+
+     // Create the client
+     const es = new Client({
+         node: 'http://localhost:9200'
+     })
+
+     // An interface describing my data model
+     interface MyObject { ... }
+
+     // Perform a search operation
+     const result: SearchResult<MyObject> = await es.search<MyObject>({
+         index: 'my-index',
+         body: {
+             query: {
+                 term: {
+                     myField: 'myValue'
+                 }
+             }
+         }
+     })
+   #+end_src
+
+** To Do
+*** TODO Support indexing operation
+*** TODO Support delete operation
+*** TODO Formalize error handling
